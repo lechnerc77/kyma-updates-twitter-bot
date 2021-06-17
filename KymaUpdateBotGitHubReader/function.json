@@ -1,0 +1,10 @@
+{
+  "bindings": [
+    {
+      "name": "configuration",
+      "type": "activityTrigger",
+      "direction": "in"
+    }
+  ],
+  "scriptFile": "../dist/KymaUpdateBotGitHubReader/index.js"
+}

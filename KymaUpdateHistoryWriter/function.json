@@ -1,0 +1,10 @@
+{
+  "bindings": [
+    {
+      "name": "updateInformation",
+      "type": "activityTrigger",
+      "direction": "in"
+    }
+  ],
+  "scriptFile": "../dist/KymaUpdateHistoryWriter/index.js"
+}

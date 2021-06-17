@@ -1,0 +1,18 @@
+{
+  "bindings": [
+    {
+      "name": "name",
+      "type": "activityTrigger",
+      "direction": "in"
+    },
+    {
+      "name": "repositoryConfiguration",
+      "type": "table",
+      "tableName": "SourceRepositoryConfiguration",
+      "partitionKey": "Repositories",
+      "filter": "(IsActive eq true)",
+      "direction": "in"
+    }
+  ],
+  "scriptFile": "../dist/KymaUpdateBotConfigReader/index.js"
+}

@@ -1,0 +1,17 @@
+{
+  "bindings": [
+    {
+      "name": "configuration",
+      "type": "activityTrigger",
+      "direction": "in"
+    },
+    {
+      "name": "updateHistory",
+      "type": "table",
+      "tableName": "RepositoryUpdateHistory",
+      "partitionKey": "History",
+      "direction": "in"
+    }
+  ],
+  "scriptFile": "../dist/KymaUpdateHistoryReader/index.js"
+}
