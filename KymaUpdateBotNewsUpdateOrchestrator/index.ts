@@ -23,8 +23,13 @@ const orchestrator = df.orchestrator(function* (context) {
         const updateInformation = buildUpdateInformation(context.bindingData.input, gitHubInfo)
 
         yield context.df.callActivityWithRetry("KymaUpdateTwitterSender", retryConfig, updateInformation)
-
+        
+        if(process.env[""] === "active"){
         yield context.df.callActivityWithRetry("KymaUpdateHistoryWriter", retryConfig, updateInformation)
+        }
+        else{
+            context.log.info("Sending to Twitter is switched off")
+        }
 
     }
 

@@ -1,13 +1,11 @@
 ﻿import * as df from "durable-functions"
-import { AzureFunction, Context, HttpRequest } from "@azure/functions"
+import { AzureFunction, Context } from "@azure/functions"
 
-const httpStart: AzureFunction = async function (context: Context, req: HttpRequest): Promise<any> {
+const timerTrigger: AzureFunction = async function (context: Context, myTimer: any): Promise<void> {
+
     const client = df.getClient(context)
-    const instanceId = await client.startNew(req.params.functionName, undefined, req.body)
+    const instanceId = await client.startNew(process.env["MainOrchestratorName"], undefined, undefined)
 
-    context.log(`Started orchestration with ID = '${instanceId}'.`)
+    context.log(`Started timer triggered orchestration with ID = '${instanceId}'.`)
 
-    return client.createCheckStatusResponse(context.bindingData.req, instanceId)
 }
-
-export default httpStart
