@@ -20,17 +20,20 @@ const orchestrator = df.orchestrator(function* (context) {
     }
     else {
 
-        const updateInformation = buildUpdateInformation(context.bindingData.input, gitHubInfo)
+        if (doUpdate === true) {
 
-        if (process.env["SendToTwitter"] === "active") {
-            yield context.df.callActivityWithRetry("KymaUpdateTwitterSender", retryConfig, updateInformation)
+            const updateInformation = buildUpdateInformation(context.bindingData.input, gitHubInfo)
+
+            if (process.env["SendToTwitter"] === "active") {
+                yield context.df.callActivityWithRetry("KymaUpdateTwitterSender", retryConfig, updateInformation)
+            }
+            else {
+                context.log.info(`Sending to Twitter is switched off - Tweet would be sent for ${updateInformation.RepositoryName}`)
+            }
+
+            yield context.df.callActivityWithRetry("KymaUpdateHistoryWriter", retryConfig, updateInformation)
+
         }
-        else {
-            context.log.info(`Sending to Twitter is switched off - Tweet would be sent for ${updateInformation.RepositoryName}`)
-        }
-
-        yield context.df.callActivityWithRetry("KymaUpdateHistoryWriter", retryConfig, updateInformation)
-
     }
 
 })
