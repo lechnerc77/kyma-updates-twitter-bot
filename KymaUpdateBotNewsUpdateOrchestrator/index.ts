@@ -9,7 +9,7 @@ const orchestrator = df.orchestrator(function* (context) {
 
     const updateJournal = yield context.df.callActivityWithRetry("KymaUpdateHistoryReader", retryConfig, context.bindingData.input)
 
-    handleUndefinedData(gitHubInfo, updateJournal, context)
+    handleUndefinedData(gitHubInfo, context)
 
     const doUpdate = isUpdateNecessary(gitHubInfo, updateJournal, context)
 
@@ -22,14 +22,14 @@ const orchestrator = df.orchestrator(function* (context) {
 
         const updateInformation = buildUpdateInformation(context.bindingData.input, gitHubInfo)
 
-        yield context.df.callActivityWithRetry("KymaUpdateTwitterSender", retryConfig, updateInformation)
-        
-        if(process.env[""] === "active"){
+        if (process.env["SendToTwitter"] === "active") {
+            yield context.df.callActivityWithRetry("KymaUpdateTwitterSender", retryConfig, updateInformation)
+        }
+        else {
+            context.log.info(`Sending to Twitter is switched off - Tweet would be sent for ${updateInformation.RepositoryName}`)
+        }
+
         yield context.df.callActivityWithRetry("KymaUpdateHistoryWriter", retryConfig, updateInformation)
-        }
-        else{
-            context.log.info("Sending to Twitter is switched off")
-        }
 
     }
 
@@ -37,17 +37,26 @@ const orchestrator = df.orchestrator(function* (context) {
 
 function isUpdateNecessary(gitHubInfo: any, updateJournal: any, context: IOrchestrationFunctionContext): boolean {
 
+
+    if (!updateJournal) {
+        //Very first entry into the history table
+        if (context.df.isReplaying === false) {
+            context.log.info(`Update is necessary for repo ${context.bindingData.input.repositoryName} - first entry`)
+        }
+        return true
+    }
+
     if ((gitHubInfo.TagName !== updateJournal.TagName) &&
         (updateJournal.PublishedAt < gitHubInfo.PublishedAt)
     ) {
         if (context.df.isReplaying === false) {
-            context.log.info(`Update is necessary`)
+            context.log.info(`Update is necessary for repo ${context.bindingData.input.repositoryName}`)
         }
 
         return true
     }
     else {
-        context.log.info(`No update required`)
+        context.log.info(`Update is necessary for repo ${context.bindingData.input.repositoryName}`)
         return false
     }
 
@@ -78,11 +87,11 @@ function handleSandboxMode(doUpdate: boolean, context: IOrchestrationFunctionCon
 
 }
 
-function handleUndefinedData(gitHubInfo: any, updateJournal: any, context: IOrchestrationFunctionContext) {
+function handleUndefinedData(gitHubInfo: any, context: IOrchestrationFunctionContext) {
 
-    if (!gitHubInfo || !updateJournal) {
-        context.log.error("No Data from GitHub and/or Update History")
-        throw new Error("No Data from GitHub and/or Update History")
+    if (!gitHubInfo) {
+        context.log.error(`No Data from GitHub and/or Update History for repository ${context.bindingData.input.repositoryName}`)
+        throw new Error(`No Data from GitHub and/or Update History for repository ${context.bindingData.input.repositoryName}`)
     }
 }
 

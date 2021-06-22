@@ -1,2 +1,5 @@
 ### Trigger Orchestration for local testing
 GET http://localhost:7071/api/orchestrators/KymaUpdateBotMainOrchestrator
+
+###
+POST http://localhost:7071/api/KymaUpdateBotManualTrigger

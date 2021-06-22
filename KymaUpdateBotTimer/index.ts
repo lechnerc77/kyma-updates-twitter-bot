@@ -9,3 +9,5 @@ const timerTrigger: AzureFunction = async function (context: Context, myTimer: a
     context.log(`Started timer triggered orchestration with ID = '${instanceId}'.`)
 
 }
+
+export default timerTrigger

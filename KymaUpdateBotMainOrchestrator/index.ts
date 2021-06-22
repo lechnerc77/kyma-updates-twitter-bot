@@ -14,7 +14,9 @@ const orchestrator = df.orchestrator(function* (context) {
             updateTasks.push(updateTask)
         }
 
-        context.log.info(`Starting ${updateTasks.length} sub-orchestrations for update`)
+        if (context.df.isReplaying === false) {
+            context.log.info(`Starting ${updateTasks.length} sub-orchestrations for update`)
+        }
 
         yield context.df.Task.all(updateTasks)
     }
