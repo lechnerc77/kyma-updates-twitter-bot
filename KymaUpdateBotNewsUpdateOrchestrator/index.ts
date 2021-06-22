@@ -56,7 +56,7 @@ function isUpdateNecessary(gitHubInfo: any, updateJournal: any, context: IOrches
         return true
     }
     else {
-        context.log.info(`Update is necessary for repo ${context.bindingData.input.repositoryName}`)
+        context.log.info(`Update is not necessary for repo ${context.bindingData.input.repositoryName}`)
         return false
     }
 

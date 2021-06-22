@@ -8,6 +8,7 @@
     {
       "name": "repositoryConfiguration",
       "type": "table",
+      "connection": "myStorageConnectionString",
       "tableName": "SourceRepositoryConfiguration",
       "partitionKey": "Repositories",
       "filter": "(IsActive eq true)",

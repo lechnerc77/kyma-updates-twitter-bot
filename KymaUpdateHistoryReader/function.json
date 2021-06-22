@@ -8,6 +8,7 @@
     {
       "name": "updateHistory",
       "type": "table",
+      "connection": "myStorageConnectionString",
       "tableName": "RepositoryUpdateHistory",
       "partitionKey": "History",
       "direction": "in"
