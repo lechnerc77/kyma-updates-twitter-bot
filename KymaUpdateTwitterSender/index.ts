@@ -3,21 +3,29 @@ import { AzureFunction, Context } from "@azure/functions"
 const TwitterClient = require('twitter-lite')
 
 const activityFunction: AzureFunction = async function (context: Context) {
+ 
+  context.log.info(`Tweet will be build`)
 
   const tweetText = buildTweet(context)
 
-  const client = new TwitterClient({
-    consumer_key: process.env["TwitterApiKey"],
-    consumer_secret: process.env["TwitterApiSecretKey"],
-    access_token_key: process.env["TwitterAccessToken"],
-    access_token_secret: process.env["TwitterAccessTokenSecret"]
-  })
+  try {
+    const client = new TwitterClient({
+      consumer_key: process.env["TwitterApiKey"],
+      consumer_secret: process.env["TwitterApiSecretKey"],
+      access_token_key: process.env["TwitterAccessToken"],
+      access_token_secret: process.env["TwitterAccessTokenSecret"]
+    })
 
-  const tweet = await client.post("statuses/update", {
-    status: tweetText,
-  })
+    const tweet = await client.post("statuses/update", {
+      status: tweetText
+    })
 
-  context.log.info("Tweet successfully sent")
+    context.log.info(`Tweet successfully sent: ${tweetText}`)
+
+  } catch (error) {
+    context.log.error(`The call of the Twitter API caused an error: ${error}`)
+  }
+
 
 }
 
