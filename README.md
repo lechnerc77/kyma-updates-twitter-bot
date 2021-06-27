@@ -1,5 +1,7 @@
 # Kyma Update Twitter Bot
 
+[![Deploy Node.js project to Azure Function App](https://github.com/lechnerc77/kyma-updates-twitter-bot/actions/workflows/main.yml/badge.svg)](https://github.com/lechnerc77/kyma-updates-twitter-bot/actions/workflows/main.yml)
+
 ## Intention
 
 This is the code for the Twitter bot of the account [kyma-updates](https://twitter.com/KymaUpdates). This is an unofficial project by a Kyma fan, so no direct relation to or support by the official [Kyma project](https://kyma-project.io/).
