@@ -1,6 +1,7 @@
 # Kyma Update Twitter Bot
 
 [![Deploy Node.js project to Azure Function App](https://github.com/lechnerc77/kyma-updates-twitter-bot/actions/workflows/main.yml/badge.svg)](https://github.com/lechnerc77/kyma-updates-twitter-bot/actions/workflows/main.yml)
+[![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/lechnerc77/kyma-updates-twitter-bot)
 
 ## Intention
 
