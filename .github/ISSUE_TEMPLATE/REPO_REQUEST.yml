@@ -1,0 +1,44 @@
+name: Repository Request
+description: Suggest an additional repository that should be watched by the Twitter bot
+title: "Repository Request: <TITLE>"
+labels: ["repo request"]
+
+body:
+  - type: input
+    id: repository-name
+    attributes:
+      label: 📁 Name of the repository
+      description: Provide the name of the GitHub repository.
+      placeholder: ex. /kyma-updates-twitter-bot
+    validations:
+      required: true
+  - type: input
+    id: repository-owner
+    attributes:
+      label: 🔐 Owner of the repository
+      description: Provide the owner of the GitHub repository.
+      placeholder: ex. lechnerc77
+    validations:
+      required: true
+  - type: dropdown
+    id: repository-owner-detail
+    attributes:
+      label: 👀 Details on owner
+      description: Are you the owner of the referenced repository.
+      options:
+        - "Yes"
+        - "No"
+    validations:
+      required: true
+  - type: textarea
+    id: reason-for-adding
+    attributes:
+      label: 👓 Why watch this repository?
+      description: Provide a short and concise description why the Kyma Twitter bot should watch this repository.
+      placeholder: Because the repo is a closed friend of the Kyma project and also would like some Twitter bot love ❤
+    validations:
+      required: false
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the request! 😃 That's all we need to know for now. We will check your request soon and come back to you!
