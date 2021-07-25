@@ -1,4 +1,5 @@
 PartitionKey,RowKey,Timestamp,RepositoryOwner,RepositoryOwner@type,RepositoryName,RepositoryName@type,HashTags,HashTags@type,IsActive,IsActive@type
 Repositories,SAP|luigi,2021-06-21T12:46:29.899Z,SAP,Edm.String,luigi,Edm.String,#luigi #microfrontend #release,Edm.String,true,Edm.Boolean
+Repositories,gardener|gardener,2021-07-25T08:11:31.282Z,gardener,Edm.String,gardener,Edm.String,#gardener #k8s #update #release,Edm.String,true,Edm.Boolean
 Repositories,kyma-project|cli,2021-06-21T12:45:39.651Z,kyma-project,Edm.String,cli,Edm.String,#kyma #cli #update #release,Edm.String,true,Edm.Boolean
 Repositories,kyma-project|kyma,2021-06-21T12:45:05.423Z,kyma-project,Edm.String,kyma,Edm.String,#kyma #update #release,Edm.String,true,Edm.Boolean
